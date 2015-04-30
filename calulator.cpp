@@ -19,7 +19,7 @@ struct CalcGrammar : public grammar<Iterator, NumType(), space_type>
 		real_parser<NumType, real_policies<NumType> > rp_;
 		factor_ = rp_[_val = _1]
 			| ('-' >> factor_)[_val = -_1]
-			| ('-' >> factor_)[_val = _1]
+			| ('+' >> factor_)[_val = _1]
 			| ('(' >> exp_[_val = _1] >> ')');
 
 		term_ = factor_[_val = _1] >>
