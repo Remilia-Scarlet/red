@@ -1,3 +1,6 @@
+#include <list>
+#include <algorithm>
+#include <functional>
 template<typename Key,typename Val>
 class TinyCache
 {
