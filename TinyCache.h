@@ -72,7 +72,7 @@ private:
         else
         {
             old->key = key;
-            old0>val = val;
+            old->val = val;
         }
         _data.pop_back();
         _data.push_front(old);
@@ -86,4 +86,4 @@ private:
             _data.push_front(da);
         }
     }
-}
+};
