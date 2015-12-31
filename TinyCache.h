@@ -21,13 +21,13 @@ public:
                 return true;
             return false;
         });
-        
+        KeyValPair* ret = nullptr;
         if(it != _data.end())
-            updateData(it);
+            ret = updateData(it);
         else
-            addCache(key,searchFunction());
+            ret = addCache(key,searchFunction());
         
-        return _data.front()->val;
+        return ret->val;
     }
     void addCacheData(const Key& key,const Val& val)
     {
@@ -64,7 +64,7 @@ private:
     
     TinyCache(const TinyCache& other);
     TinyCache& operator=(const TinyCache& other);
-    void addCache(const Key& key,const Val& val)
+    KeyValPair* addCache(const Key& key,const Val& val)
     {
         KeyValPair* old = _data.back();
         if(old == nullptr)
@@ -76,8 +76,9 @@ private:
         }
         _data.pop_back();
         _data.push_front(old);
+        return old;
     }
-    void updateData(typename std::list<KeyValPair*>::iterator& it)
+    KeyValPair* updateData(typename std::list<KeyValPair*>::iterator& it)
     {
         KeyValPair* da = *it;
         if(it != _data.begin())
@@ -85,5 +86,6 @@ private:
             _data.erase(it);
             _data.push_front(da);
         }
+        return da;
     }
 };
